@@ -72,7 +72,7 @@ $conn->close();
             height: 500px;
             position: relative;
             top: 70px;
-            left: 700px;
+            left: 600px;
             text-align: center;
         }
         input[type="text"], input[type="password"] {
