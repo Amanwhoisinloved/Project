@@ -1,31 +1,29 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['username']) || !isset($_POST['note_date']) || !isset($_POST['note'])) {
-    http_response_code(400);
-    echo "Invalid request.";
-    exit();
+if (!isset($_SESSION['username'])) {
+    echo "Not logged in.";
+    exit;
 }
 
 $conn = new mysqli('localhost', 'root', '', 'simple_auth');
 if ($conn->connect_error) {
-    http_response_code(500);
     echo "Database connection failed.";
-    exit();
+    exit;
 }
 
-$username = $_SESSION['username'];
 $note_date = $_POST['note_date'];
 $note = $_POST['note'];
 
+$username = $_SESSION['username'];
 $user_result = $conn->query("SELECT id FROM users WHERE username = '$username'");
 $user = $user_result->fetch_assoc();
 $user_id = $user['id'];
 
-// Check if note already exists for this date and user
-$existing = $conn->query("SELECT id FROM calendar_notes WHERE user_id = $user_id AND note_date = '$note_date'");
-if ($existing->num_rows > 0) {
-    // Update existing note
+// Check if a note already exists
+$check = $conn->query("SELECT id FROM calendar_notes WHERE user_id = $user_id AND note_date = '$note_date'");
+
+if ($check->num_rows > 0) {
+    // Update note
     $stmt = $conn->prepare("UPDATE calendar_notes SET note = ? WHERE user_id = ? AND note_date = ?");
     $stmt->bind_param("sis", $note, $user_id, $note_date);
 } else {
@@ -35,41 +33,10 @@ if ($existing->num_rows > 0) {
 }
 
 if ($stmt->execute()) {
-    echo "Note saved successfully.";
+    echo "Note saved!";
 } else {
-    http_response_code(500);
     echo "Failed to save note.";
 }
 
 $conn->close();
 ?>
-<script>
-function showNoteForm(date) {
-    document.getElementById('note-date').innerText = date;
-    document.getElementById('note-date-input').value = date;
-    document.getElementById('note-text').value = ''; // clear previous input
-    document.getElementById('note-form').style.display = 'block';
-}
-
-function saveNote() {
-    const date = document.getElementById('note-date-input').value;
-    const note = document.getElementById('note-text').value;
-
-    if (!note) {
-        alert("Please enter a note.");
-        return;
-    }
-
-    fetch('save_note.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `note_date=${encodeURIComponent(date)}&note=${encodeURIComponent(note)}`
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data);
-        location.reload(); // reload to reflect updated notes
-    })
-    .catch(err => alert("Error: " + err));
-}
-</script>

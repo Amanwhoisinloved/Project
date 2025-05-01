@@ -52,15 +52,14 @@ $conn->close();
         body {
            
             font-family: Arial, sans-serif;
-            background-image: url("bg.jpg");
-            background-size: cover;
-            background-position: center;
+            background-image: url("bg1.jpg");
+            background-color: #ffe4e1;
             background-size: cover;
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 50px;
+            margin-top: 50px;/
         }
         .form-container {
             background: Semi-transparent;
@@ -85,7 +84,7 @@ $conn->close();
         button[type="submit"] {
             width: 100%;
             padding: 10px;
-            background: #4CAF50;
+            background:rgb(221, 75, 197);
             color: white;
             border: none;
             border-radius: 5px;
@@ -99,8 +98,7 @@ $conn->close();
 <body>
     
 
-    <!-- Logo Panel placeholder -->
-    <div id="logo-panel"></div>
+   
 
     <div class="form-container">
         <h2>Login</h2>
