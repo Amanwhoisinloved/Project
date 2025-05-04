@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'simple_auth');
+$conn = new mysqli('localhost', 'root', '', 'calendardb');
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 }
