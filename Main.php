@@ -299,7 +299,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 
 <div class="sidebar-right">
     <h3>Reminders</h3>
-    <p>No new reminders.</p>
+    <p>No new reminders for now.</p>
 </div>
 
 <div class="main-content">
