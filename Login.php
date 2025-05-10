@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $user['username'];
             
             // Redirect to Main.php after successful login
-            header("Location: Main.php");
+            header("Location: Dashboard.php");
             exit(); // Important to stop the script after redirect
         } else {
             echo "Invalid password.";

@@ -112,11 +112,11 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 10px;
-            max-width: 1000px;
-            margin: 20px auto;
+            max-width: 700px;
+            margin: 15px auto;
             background: transparent;
             padding: 20px;
-            border-radius: 16px;
+            border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
@@ -181,7 +181,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
         }
 
         /* Note form */
-        .note-form {
+ .note-form {
     position: absolute;
     display: none;
     background: #fff0f5;
@@ -292,8 +292,9 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     <h2>My Calendar</h2>
     <ul>
         <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="Calendar.php"><i class="fas fa-calendar"></i>Calendar</a></li>
         <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
-        <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
 
