@@ -1,6 +1,6 @@
-CREATE DATABASE simple_auth;
+CREATE DATABASE calendardb;
 
-USE simple_auth;
+USE calendardb;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
