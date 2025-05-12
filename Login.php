@@ -52,7 +52,7 @@ $conn->close();
         body {
            
             font-family: Arial, sans-serif;
-            background-image: url("bg1.jpg");
+            background-image: url("bg3.jpg");
             background-color: #ffe4e1;
             background-size: cover;
             font-family: Arial, sans-serif;

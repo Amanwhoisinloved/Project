@@ -31,7 +31,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
             font-family: 'Nunito', sans-serif;
             display: flex;
             min-height: 100vh;
-            background: #fdf6f0 url("bg1.jpg") no-repeat center center/cover;
+            background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
             overflow-x: hidden;
         }
 
@@ -109,47 +109,52 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 
         /* Calendar Styles */
         .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            max-width: 700px;
-            margin: 15px auto;
-            background: transparent;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    max-width: 500px;
+    margin: 20px auto;
+    background: #e6f0ff;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
 
-        .calendar-header {
-            font-weight: bold;
-            padding: 12px;
-            text-align: center;
-            background: #f8c8dc;
-            border-radius: 8px;
-            color: #333;
-        }
 
-        .day {
-            min-height: 100px;
-            background-color: #fffdfd;
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+       .calendar-header {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    background: #b3d7ff;
+    border-radius: 6px;
+    color: #004080;
+}
+
+
+       .day {
+    min-height: 80px;
+    background-color: #f8fbff;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
 
         .day:hover {
-            background-color: #ffeef4;
-        }
-        .day.today {
-    background-color: #d63384;
+    background-color: #cce5ff;
+}
+
+.day.today {
+    background-color: #007bff;
     color: white;
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
 
     
-}
+
 .holiday {
     font-size: 0.75em;
     font-weight: bold;

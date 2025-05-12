@@ -18,7 +18,8 @@ if ($conn->connect_error) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f2f2f2;
+            background-image: url("bg3.jpg");
+            background-size: cover;
             display: flex;
             flex-direction: column;
             align-items: center;

@@ -12,7 +12,7 @@
             font-family: 'Nunito', sans-serif;
             display: flex;
             min-height: 100vh;
-            background: #fdf6f0 url("bg1.jpg") no-repeat center center/cover;
+            background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
             overflow-x: hidden;
         }
         .sidebar-left {
