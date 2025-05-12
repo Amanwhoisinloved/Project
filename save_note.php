@@ -1,41 +1,49 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    echo "Not logged in.";
-    exit;
+    header("Location: login.php");
+    exit();
 }
 
 $conn = new mysqli('localhost', 'root', '', 'calendardb');
 if ($conn->connect_error) {
-    echo "Database connection failed.";
-    exit;
+    die('Connection Failed: ' . $conn->connect_error);
 }
 
-$note_date = $_POST['note_date'];
-$note = $_POST['note'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $note_date = $_POST['note_date'];
+    $note = $_POST['note'];
+    $note_image = $_FILES['note_image'];
 
-$username = $_SESSION['username'];
-$user_result = $conn->query("SELECT id FROM users WHERE username = '$username'");
-$user = $user_result->fetch_assoc();
-$user_id = $user['id'];
+    // Handle the image upload
+    $image_path = null;
+    if ($note_image['error'] == 0) {
+        $target_dir = "uploads/"; // The directory to store the uploaded images
+        $image_name = basename($note_image["name"]);
+        $image_path = $target_dir . $image_name;
 
-// Check if a note already exists
-$check = $conn->query("SELECT id FROM calendar_notes WHERE user_id = $user_id AND note_date = '$note_date'");
+        // Check if the directory exists, if not create it
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
 
-if ($check->num_rows > 0) {
-    // Update note
-    $stmt = $conn->prepare("UPDATE calendar_notes SET note = ? WHERE user_id = ? AND note_date = ?");
-    $stmt->bind_param("sis", $note, $user_id, $note_date);
-} else {
-    // Insert new note
-    $stmt = $conn->prepare("INSERT INTO calendar_notes (user_id, note_date, note) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $note_date, $note);
-}
+        // Move the uploaded file to the target directory
+        if (!move_uploaded_file($note_image["tmp_name"], $image_path)) {
+            die("Sorry, there was an error uploading your file.");
+        }
+    }
 
-if ($stmt->execute()) {
-    echo "Note saved!";
-} else {
-    echo "Failed to save note.";
+    // Get the user ID
+    $user_result = $conn->query("SELECT id FROM users WHERE username = '{$_SESSION['username']}'");
+    $user_id = $user_result->fetch_assoc()['id'];
+
+    // Save the note and image path to the database
+    $stmt = $conn->prepare("INSERT INTO calendar_notes (user_id, note_date, note, note_image) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $user_id, $note_date, $note, $image_path);
+    $stmt->execute();
+
+    echo "Note and image saved successfully!";
+    $stmt->close();
 }
 
 $conn->close();

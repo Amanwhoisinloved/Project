@@ -369,33 +369,41 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     $current_day = date('Y-m-d', strtotime("$current_year-$current_month-$day"));
 
     $note_preview = isset($notes[$current_day]) 
-        ? "<div class='note'>" . htmlspecialchars(substr($notes[$current_day], 0, 20)) . "...</div>" 
-        : "";
+    ? "<div class='note'>" . htmlspecialchars(substr($notes[$current_day], 0, 20)) . "...</div>" 
+    : "";
 
-    $holiday_label = isset($holidays[$current_day]) 
-        ? "<div class='holiday'>" . htmlspecialchars($holidays[$current_day]) . "</div>" 
-        : "";
+$image_preview = isset($notes[$current_day]['note_image']) && !empty($notes[$current_day]['note_image']) 
+    ? "<img src='" . htmlspecialchars($notes[$current_day]['note_image']) . "' alt='Note Image' style='width: 100px; height: 100px; object-fit: cover; border-radius: 8px; margin-top: 8px;'>" 
+    : "";
 
-    $today_class = $current_day == date('Y-m-d') ? 'today' : '';
+$holiday_label = isset($holidays[$current_day]) 
+    ? "<div class='holiday'>" . htmlspecialchars($holidays[$current_day]) . "</div>" 
+    : "";
 
-    echo "<div class='day $today_class' onclick='showNoteForm(\"$current_day\")'>
-            $day
-            $holiday_label
-            $note_preview
-          </div>";
+$today_class = $current_day == date('Y-m-d') ? 'today' : '';
+
+echo "<div class='day $today_class' onclick='showNoteForm(\"$current_day\")'>
+        $day
+        $holiday_label
+        $note_preview
+        $image_preview
+      </div>";
 }
+
+
 
         ?>
     </div>
 
     <!-- Note Form -->
-    <<div class="note-form" id="note-form">
+   <div class="note-form" id="note-form">
     <h3><i class="fas fa-sticky-note"></i> Note for <span id="note-date"></span></h3>
     <input type="hidden" id="note-date-input">
     <textarea id="note-text" placeholder="Write your note here..."></textarea>
-    <button onclick="saveNote()"><i class="fas fa-save"></i> Save Note</button>
+    <label for="note-image">Upload Image</label>
+    <input type="file" id="note-image" accept="image/*">
+    <button onclick="saveNote()">Save Note</button>
 </div>
-
 
 
 <script>
@@ -424,15 +432,19 @@ function showNoteForm(date) {
 function saveNote() {
     const noteDate = document.getElementById('note-date-input').value;
     const noteText = document.getElementById('note-text').value;
+    const noteImage = document.getElementById('note-image').files[0];
 
-    if (noteText.trim() === "") {
-        alert("Please enter a note.");
+    if (noteText.trim() === "" && !noteImage) {
+        alert("Please enter a note or select an image.");
         return;
     }
 
     const formData = new FormData();
     formData.append('note_date', noteDate);
     formData.append('note', noteText);
+    if (noteImage) {
+        formData.append('note_image', noteImage);
+    }
 
     fetch('save_note.php', {
         method: 'POST',
@@ -447,6 +459,7 @@ function saveNote() {
         console.error("Error:", error);
     });
 }
+
 
 window.addEventListener('click', function(e) {
     const form = document.getElementById('note-form');
