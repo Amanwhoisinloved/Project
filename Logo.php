@@ -7,7 +7,7 @@
         body {
             margin: 0;
             height: 100vh;
-            background-image: url("bg3.jpg");
+            background-image: url("images/bg3.jpg");
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -47,11 +47,14 @@
         .nav-links a:hover {
             color: #4CAF50;
         }
+
+        
     </style>
 </head>
 <body>
 
-    <img src="logo.png" alt="Logo" class="logo">
+    <img src="images/logo.png" alt="Logo" class="logo">
+    <p>Memo. Memories. Nostalgia.</p>
     <div class="nav-links">
         <a href="login.php">Login</a>
         <a href="signup.php">Signup</a>
