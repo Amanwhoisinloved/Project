@@ -15,3 +15,6 @@ CREATE TABLE calendar_notes (
     note TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+ALTER TABLE calendar_notes
+    -> ADD COLUMN note_image VARCHAR(255) NULL;
