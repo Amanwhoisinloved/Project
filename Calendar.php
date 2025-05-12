@@ -1,4 +1,8 @@
 <?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
+
+<?php
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -72,7 +76,8 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
             transition: 0.3s;
         }
 
-        .sidebar-left ul li a:hover {
+        .sidebar-left ul li a:hover,
+        .sidebar-left ul li a.active {
             background-color: #ffeef4;
             color: #d63384;
         }
@@ -296,9 +301,9 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 <div class="sidebar-left">
     <h2>My Calendar</h2>
     <ul>
-        <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="Calendar.php"><i class="fas fa-calendar"></i>Calendar</a></li>
-        <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
+         <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
+        <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
         <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
