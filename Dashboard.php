@@ -46,7 +46,7 @@ while ($row = $notes_query->fetch_assoc()) {
             height: 100vh;
 
             background: url('images/bgwow.png') center/cover no-repeat;
-            filter: blur(10px);
+            filter: blur(15px);
             z-index: -2;
         }
 
@@ -58,7 +58,14 @@ while ($row = $notes_query->fetch_assoc()) {
             position: relative;
         }
 
-
+        .pixel-font {
+            color: white;
+            font-family: 'Retropix', sans-serif;
+            stroke-width: 5%;
+            stroke: black;
+            stroke-opacity: 1; /* 100% opacity */
+            text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8); /* Vertical shadow */
+        }
 
         .sidebar-left {
             width: 240px;
@@ -68,29 +75,12 @@ while ($row = $notes_query->fetch_assoc()) {
             top: 0;
             padding: 30px 20px;
             background-color: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(20px); 
+            backdrop-filter: blur(30px); 
             -webkit-backdrop-filter: blur(10px); 
             
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); 
             border-right: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        .pixel-font {
-            color: white;
-            font-family: 'Retropix', sans-serif;
-            stroke-width: 5%;
-            stroke: black;
-            stroke-opacity: 1; /* 100% opacity */
-            text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8); /* Vertical shadow */
-            background-image: url('images/welcomebg.png');
-            background-size: contain; /* or contain, depending on the effect */
-            background-repeat: no-repeat;
-            background-position: center;
-            display: inline-block; /* to make background fit content */
-            color: white;
-        }
-
-
 
         .sidebar-left ul {
             list-style: none;
@@ -114,7 +104,7 @@ while ($row = $notes_query->fetch_assoc()) {
         }
 
         .sidebar-left ul li a:hover {
-             background-color: #dceeff;
+             background-color:rgb(255, 255, 255);
             color: #3399ff;
         }
 
