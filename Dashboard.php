@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -88,8 +86,7 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
             transition: 0.3s;
         }
 
-       .sidebar-left ul li a:hover,
-        .sidebar-left ul li a.active {
+        .sidebar-left ul li a:hover {
             background-color: #ffeef4;
             color: #d63384;
         }
@@ -210,9 +207,9 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
 <div class="sidebar-left">
     <h2>My Calendar</h2>
     <ul>
-         <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
-        <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
+        <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="Calendar.php"><i class="fas fa-calendar"></i> Calendar</a></li>
+        <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
         <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
