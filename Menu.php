@@ -1,7 +1,10 @@
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <title>Calendar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,7 +54,8 @@
             transition: 0.3s;
         }
 
-        .sidebar-left ul li a:hover {
+        .sidebar-left ul li a:hover,
+        .sidebar-left ul li a.active {
             background-color: #ffeef4;
             color: #d63384;
         }
@@ -67,27 +71,27 @@
             flex: 1;
         }
 
-        h1, h2 {
-            position: relative;
+        h1 {
             text-align: center;
             color: #333;
         }
-    
-        </style>
+    </style>
 </head>
 <body>
 
 <div class="sidebar-left">
     <h2>My Calendar</h2>
     <ul>
-        <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="Calendar.php"><i class="fas fa-calendar"></i>Calendar</a></li>
-        <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
+        <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
+        <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
         <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
+
 <div class="main">
-    <h1> dis too shall pass</h1>
+    <h1>This too shall pass</h1>
 </div>
 
 </body>
+</html>
