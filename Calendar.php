@@ -32,37 +32,60 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     <style>
       
       
-      body {
-    margin: 0;
-    font-family: 'Nunito', sans-serif;
-    background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    overflow: hidden;
-}
+        @font-face {
+            font-family: 'Retropix';
+            src: url('fonts/retropix.ttf') format('truetype');
+        }
 
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
 
+            background: url('images/bgwow.png') center/cover no-repeat;
+            filter: blur(15px);
+            z-index: -2;
+        }
 
-        /* Sidebar styles */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .pixel-font {
+            color: white;
+            font-family: 'Retropix', sans-serif;
+            stroke-width: 5%;
+            stroke: black;
+            stroke-opacity: 1; /* 100% opacity */
+            text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8); /* Vertical shadow */
+        }
+
         .sidebar-left {
             width: 240px;
-            background-color: transparent;
-            padding: 30px 20px;
             height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
-        }
-
-        .sidebar-left h2 {
-            color: #333;
-            margin-bottom: 40px;
+            padding: 30px 20px;
+            background-color: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(30px); 
+            -webkit-backdrop-filter: blur(10px); 
+            
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); 
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-left ul {
             list-style: none;
             padding: 0;
+            margin-left:4%;
         }
 
         .sidebar-left ul li {
@@ -80,28 +103,49 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
             transition: 0.3s;
         }
 
-        .sidebar-left ul li a:hover,
-        .sidebar-left ul li a.active {
-            background-color: #ffeef4;
-            color: #d63384;
+        .sidebar-left ul li a:hover {
+             background-color:rgb(255, 255, 255);
+            color: #3399ff;
         }
 
         .sidebar-left ul li i {
             margin-right: 10px;
         }
+        
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
 
-        /* Right sidebar */
-        .sidebar-right {
-            width: 220px;
-            background-color: #ffeef4;
-            padding: 30px 20px;
-            height: 100vh;
-            position: fixed;
-            right: 0;
-            top: 0;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
-            color: #333;
-        }
+.nav-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.nav-buttons a:hover {
+    transform: scale(1.15);
+}
+
+.nav-buttons img {
+    height: 55px;
+    width: 55px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+}
+
+.nav-buttons a:hover img {
+    transform: scale(1.25);
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.2));
+}
+
+
 
         /* Main content */
      .main-content {
@@ -189,22 +233,22 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 
 
     
-
 .holiday {
     font-size: 0.75em;
     font-weight: bold;
-    color: #e63946;
-    background-color: #fff3f3;
+    color: #1c7ed6; /* soft blue */
+    background-color: #e0f2ff; /* very light blue */
     padding: 4px 6px;
-    border-left: 4px solid #e63946;
+    border-left: 4px solid #1c7ed6;
     border-radius: 5px;
     margin-top: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .day.holiday-day {
-    background-color: #ffe6e6;
+    background-color: #d0ebff;
 }
 
 .note, .holiday {
@@ -214,24 +258,24 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     white-space: nowrap;
 }
 
-        .note {
-            font-size: 0.8em;
-            color: #555;
-            background: #fff0f5;
-            border-left: 4px solid #d63384;
-            padding: 5px 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.note {
+    font-size: 0.8em;
+    color: #1c3d5a;
+    background: #e8f6ff;
+    border-left: 4px solid #339af0;
+    padding: 5px 8px;
+    border-radius: 5px;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-        /* Note form */
- .note-form {
+/* Note form */
+.note-form {
     position: absolute;
     display: none;
-    background: #fff0f5;
+    background: #e6f4ff;
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -239,13 +283,13 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     width: 90%;
     z-index: 1000;
     transition: all 0.3s ease;
-    border: 2px solid #f8c8dc;
+    border: 2px solid #b3daff;
     font-family: 'Nunito', sans-serif;
 }
 
 .note-form h3 {
     margin: 0 0 10px;
-    color: #d63384;
+    color: #339af0;
     font-size: 1.2em;
     display: flex;
     align-items: center;
@@ -257,7 +301,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     height: 100px;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #b5d9f6;
     resize: vertical;
     font-size: 0.95em;
     background: #fff;
@@ -267,13 +311,13 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 }
 
 .note-form textarea:focus {
-    border-color: #d63384;
+    border-color: #339af0;
 }
 
 .note-form button {
     margin-top: 12px;
     padding: 10px;
-    background: #d63384;
+    background: #339af0;
     color: white;
     border: none;
     border-radius: 30px;
@@ -285,7 +329,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 }
 
 .note-form button:hover {
-    background-color: #b42b6c;
+    background-color: #1c7ed6;
 }
 
 .note-form.show {
@@ -295,31 +339,6 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-        .nav-buttons {
-    text-align: center;
-    margin: 30px 0;
-}
-
-.nav-buttons a {
-    display: inline-block;
-    background-color: #f8c8dc;
-    color: #333;
-    padding: 10px 25px;
-    margin: 0 10px;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.nav-buttons a:hover {
-    background-color: #d63384;
-    color: #fff;
-    transform: translateY(-2px);
 }
 
 
@@ -344,18 +363,30 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 
 
     h2 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #333;
+            color: white;
+            font-family: 'Retropix', sans-serif;
+            stroke: black;
+            font-size: 200%;
+            stroke-opacity: 1; 
+            text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8); 
+            text-align: center;
+            margin-bottom: 20px;
+            background-image: url('images/calendarbg.png');
+            padding: 10%;
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 20px; 
+            color: white;
+
 }
     </style>
 </head>
 <body>
 
-<div class="sidebar-left">
-    <h2>My Calendar</h2>
-    <ul>
+        <div class="sidebar-left">
+            <img src="images/logo.png" alt="My Calendar" style="width: 180%; max-width: 250px; margin-bottom:40px; margin-top:20px; display: block;">
+            <ul>
          <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
         <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
         <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
@@ -363,10 +394,6 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     </ul>
 </div>
 
-<!-- <div class="sidebar-right">
-    <h3>Reminders</h3>
-    <p>No new reminders for now.</p>
-</div> -->
 
 <div class="main-content">
     <h2><?= date('F Y', strtotime("$current_year-$current_month-01")); ?></h2>
@@ -396,9 +423,14 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     ?>
 
 <div class="nav-buttons">
-    <a href="?month=<?= $prev_month ?>&year=<?= $prev_year ?>">← Previous</a>
-    <a href="?month=<?= $next_month ?>&year=<?= $next_year ?>">Next →</a>
+    <a href="?month=<?= $prev_month ?>&year=<?= $prev_year ?>">
+        <img src="images/leftarrow.png" alt="Previous">
+    </a>
+    <a href="?month=<?= $next_month ?>&year=<?= $next_year ?>">
+        <img src="images/rightarrow.png" alt="Next">
+    </a>
 </div>
+
 
 
     <div class="calendar">
