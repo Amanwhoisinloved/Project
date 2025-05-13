@@ -308,10 +308,10 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     </ul>
 </div>
 
-<div class="sidebar-right">
+<!-- <div class="sidebar-right">
     <h3>Reminders</h3>
     <p>No new reminders for now.</p>
-</div>
+</div> -->
 
 <div class="main-content">
     <h1>Welcome, <?= htmlspecialchars($_SESSION['username']); ?>!</h1>

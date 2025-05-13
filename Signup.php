@@ -16,42 +16,124 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <title>Signup</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url("images/bg3.jpg");
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
+        @font-face {
+            font-family: 'Retropix';
+            src: url('fonts/Retropix.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Retropix', sans-serif;
+            background-image: url("images/samplebg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px gray;
-            margin-top: 20px;
-            width: 300px;
+            animation: popIn 0.6s ease-out;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            width: 90%;
+            max-width: 400px;
             text-align: center;
         }
-        input[type="text"], input[type="password"] {
-            width: 90%;
-            padding: 10px;
+
+        .logo {
+            width: 300px;
+            height: 80px;
+            margin-bottom: 5px;
+        }
+
+        .form-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 26px;
+            text-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Fully transparent */
+        }
+
+        .error-message {
+            color: #d9534f;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Retropix', sans-serif;
         }
+
         button[type="submit"] {
             width: 100%;
-            padding: 10px;
-            background: #2196F3;
+            padding: 12px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background: url('images/woodtexture.png');
+            background-size: cover;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-family: 'Retropix', sans-serif;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 0 #5c3c2d;
         }
+
         button[type="submit"]:hover {
-            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #4e2f22;
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-container h2 {
+                font-size: 22px;
+            }
+
+            button[type="submit"] {
+                font-size: 16px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -68,7 +150,14 @@ if ($conn->connect_error) {
             <button type="submit">Sign Up</button>
         </form>
 
-        <p style="margin-top: 10px;">Already have an account? <a href="login.php">Login</a></p>
+<p style="margin-top: 20px;">
+  Already have an account?
+  <a href="login.php" style="vertical-align: middle;">
+    <img src="images/loginforsignup.png" alt="Login" style="height: 40px; vertical-align: middle;">
+  </a>
+</p>
+
+
 
         <!-- PHP response messages -->
         <div style="color:red; margin-top:10px;">
