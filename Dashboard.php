@@ -21,17 +21,6 @@ while ($row = $notes_query->fetch_assoc()) {
     $notes[] = $row;
 }
 
-// Get upcoming notes (next 7 days)
-$today = date('Y-m-d');
-$week_from_now = date('Y-m-d', strtotime('+7 days'));
-$upcoming_notes_query = $conn->query("SELECT note_date, note, note_image FROM calendar_notes 
-                                     WHERE user_id = $user_id 
-                                     AND note_date BETWEEN '$today' AND '$week_from_now'
-                                     ORDER BY note_date ASC");
-$upcoming_notes = [];
-while ($row = $upcoming_notes_query->fetch_assoc()) {
-    $upcoming_notes[] = $row;
-}
 ?>
 
 <!DOCTYPE html>
@@ -200,6 +189,41 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
             font-size: 40px;
             margin-bottom: 10px;
         }
+
+        /* Gallery styling */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .gallery-item {
+            width: 48%;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
     </style>
 </head>
 <body>
@@ -219,28 +243,6 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
     
     <div class="dashboard-grid">
         <div class="dashboard-card">
-            <h3><i class="fas fa-sticky-note"></i> Upcoming Notes</h3>
-            <div class="notes-container">
-                <?php if (count($upcoming_notes) > 0): ?>
-                    <?php foreach ($upcoming_notes as $note): ?>
-                        <div class="note-card">
-                            <div class="note-date"><?= date('F j, Y', strtotime($note['note_date'])) ?></div>
-                            <div class="note-text"><?= nl2br(htmlspecialchars($note['note'])) ?></div>
-                            <?php if (!empty($note['note_image'])): ?>
-                                <img class="note-image" src="<?= htmlspecialchars($note['note_image']) ?>" alt="Note Image">
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="empty-state">
-                        <i class="far fa-calendar-times"></i>
-                        <p>No upcoming notes for the next 7 days</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <div class="dashboard-card">
             <h3><i class="fas fa-chart-pie"></i> Summary</h3>
             
             <div class="summary-item">
@@ -259,7 +261,7 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
                 </div>
                 <div>
                     <h4>Upcoming Notes</h4>
-                    <p><?= count($upcoming_notes) ?></p>
+                    <p>To be shown in calendar view</p>
                 </div>
             </div>
             
@@ -303,6 +305,20 @@ while ($row = $upcoming_notes_query->fetch_assoc()) {
                         <p>No notes found. Add notes from the calendar page.</p>
                     </div>
                 <?php endif; ?>
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3><i class="fas fa-image"></i> Image Gallery</h3>
+            <div class="gallery">
+                <?php foreach ($notes as $note): ?>
+                    <?php if (!empty($note['note_image'])): ?>
+                        <div class="gallery-item">
+                            <img src="<?= htmlspecialchars($note['note_image']) ?>" alt="Note Image">
+                            <div class="caption"><?= nl2br(htmlspecialchars($note['note'])) ?></div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
