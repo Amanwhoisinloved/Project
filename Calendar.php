@@ -30,14 +30,18 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Nunito', sans-serif;
-            display: flex;
-            min-height: 100vh;
-            background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
-            overflow-x: hidden;
-        }
+      
+      
+      body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+
 
         /* Sidebar styles */
         .sidebar-left {
@@ -100,12 +104,20 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
         }
 
         /* Main content */
-        .main-content {
-            margin-left: 260px;
-            margin-right: 240px;
-            padding: 40px;
-            flex: 1;
-        }
+     .main-content {
+    padding: 40px;
+    flex: 1;
+    margin-left: 240px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+
 
         h1, h2 {
             text-align: center;
@@ -113,17 +125,21 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
         }
 
         /* Calendar Styles */
-        .calendar {
+      .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    max-width: 500px;
-    margin: 20px auto;
+    gap: 15px;
+    width: 100%;
+    max-width:  1200px;
     background: #e6f0ff;
-    padding: 15px;
+    padding: 30px;
     border-radius: 16px;
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+       margin: 0 auto;
+    
 }
+
+
 
 
        .calendar-header {
@@ -136,15 +152,27 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 }
 
 
-       .day {
-    min-height: 80px;
+   .day {
+    min-height: 100px;
+    height: 100px; /* Fix height */
+    aspect-ratio: 1 / 1;
     background-color: #f8fbff;
     border: 1px solid #cce5ff;
     border-radius: 8px;
-    padding: 8px;
+    padding: 10px;
+    box-sizing: border-box;
     cursor: pointer;
     transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden; /* Prevent content from expanding box */
+    position: relative;
 }
+
+
+
 
 
         .day:hover {
@@ -157,6 +185,8 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
     font-weight: bold;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
+
+
 
     
 
@@ -175,6 +205,13 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 }
 .day.holiday-day {
     background-color: #ffe6e6;
+}
+
+.note, .holiday {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
         .note {
@@ -286,14 +323,32 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 }
 
 
-        @media (max-width: 768px) {
-            .calendar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .calendar-header {
-                display: none;
-            }
-        }
+      @media (max-width: 1024px) {
+    .calendar {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .calendar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sidebar-left,
+    .sidebar-right {
+        display: none;
+    }
+    .main-content {
+        margin: 0;
+        padding: 20px;
+    }
+}
+
+
+    h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
     </style>
 </head>
 <body>
@@ -314,7 +369,6 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
 </div> -->
 
 <div class="main-content">
-    <h1>Welcome, <?= htmlspecialchars($_SESSION['username']); ?>!</h1>
     <h2><?= date('F Y', strtotime("$current_year-$current_month-01")); ?></h2>
 
     <?php
