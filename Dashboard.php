@@ -82,6 +82,12 @@ while ($row = $notes_query->fetch_assoc()) {
             stroke: black;
             stroke-opacity: 1; /* 100% opacity */
             text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8); /* Vertical shadow */
+            background-image: url('images/welcomebg.png');
+            background-size: contain; /* or contain, depending on the effect */
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block; /* to make background fit content */
+            color: white;
         }
 
 
@@ -320,33 +326,25 @@ while ($row = $notes_query->fetch_assoc()) {
 }
 
 
-    </style>
-</head>
-<body>
+            </style>
+        </head>
+        <body>
 
-<div class="sidebar-left">
-    <img src="images/logo.png" alt="My Calendar" style="width: 180%; max-width: 250px; margin-bottom:40px; margin-top:20px; display: block;">
-    <ul>
-        <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="Calendar.php"><i class="fas fa-calendar"></i> Calendar</a></li>
-        <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
-        <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
-</div>
+        <div class="sidebar-left">
+            <img src="images/logo.png" alt="My Calendar" style="width: 180%; max-width: 250px; margin-bottom:40px; margin-top:20px; display: block;">
+            <ul>
+                <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="Calendar.php"><i class="fas fa-calendar"></i> Calendar</a></li>
+                <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
+                <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
 
         <div class="main-content">
-            <h1 class="pixel-font"style="
-            background-image: url('images/welcomebackground.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            padding: 20px;
-            display: inline-block;
-            color: white;">
-        Welcome, <?= htmlspecialchars($_SESSION['username']); ?>!
+            <h1 class="pixel-font">Welcome, <?= htmlspecialchars($_SESSION['username']); ?>!
             <img src="images/cutecar.png" alt="car" style="height: 50px; vertical-align: bottom; margin-right: 1px;">
         </h1>
-    
+            
         <div class="dashboard-grid">
             <div class="dashboard-card">
         <h3>
