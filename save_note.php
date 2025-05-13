@@ -1,14 +1,11 @@
 <?php
+include 'db.php';
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'calendardb');
-if ($conn->connect_error) {
-    die('Connection Failed: ' . $conn->connect_error);
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $note_date = $_POST['note_date'];

@@ -1,18 +1,18 @@
 <?php
 session_start();
+include 'db.php';
 
-// Connect to database
-$conn = new mysqli('localhost', 'root', '', 'calendardb');
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+
 
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 }
 
-// 🚫 Prevent already-logged-in users from viewing login.php again
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit();
-}
+
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -184,12 +184,20 @@ $conn->close();
         <?php if(isset($error_message)): ?>
             <div class="error-message"><?= htmlspecialchars($error_message) ?></div>
         <?php endif; ?>
-        <form action="login.php" method="POST">
-            <input type="text" name="username" placeholder="Username" required><br>
-            <input type="password" name="password" placeholder="Password" required><br>
+        <form method="POST" action="login.php" autocomplete="off">
+           <input type="text" name="username" placeholder="Username" autocomplete="off" value="<?= isset($error_message) ? htmlspecialchars($username) : '' ?>" required><br>
+<input type="password" name="password" placeholder="Password" autocomplete="new-password" value="" required><br>
+
             <button type="submit">LOGIN</button>
         </form>
     </div>
+    <script>
+    window.onload = function() {
+        document.querySelector('input[name="username"]').value = '';
+        document.querySelector('input[name="password"]').value = '';
+    };
+</script>
+
 
 </body>
 </html>

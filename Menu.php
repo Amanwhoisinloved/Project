@@ -15,54 +15,53 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             font-family: 'Nunito', sans-serif;
             display: flex;
             min-height: 100vh;
-            background: #fdf6f0 url("bg3.jpg") no-repeat center center/cover;
+            background: url("images/bgwow.png") no-repeat center center/cover;
             overflow-x: hidden;
         }
-        .sidebar-left {
-            width: 240px;
-            background-color: transparent;
-            padding: 30px 20px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
-        }
+       .sidebar-left {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 20px;
+    background-color: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(30px); 
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); 
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-        .sidebar-left h2 {
-            color: #333;
-            margin-bottom: 40px;
-        }
+.sidebar-left ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 4%;
+}
 
-        .sidebar-left ul {
-            list-style: none;
-            padding: 0;
-        }
+.sidebar-left ul li {
+    margin-bottom: 20px;
+}
 
-        .sidebar-left ul li {
-            margin-bottom: 20px;
-        }
+.sidebar-left ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
 
-        .sidebar-left ul li a {
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
+.sidebar-left ul li a:hover {
+    background-color: rgb(255, 255, 255);
+    color: #3399ff;
+}
 
-        .sidebar-left ul li a:hover,
-        .sidebar-left ul li a.active {
-            background-color: #ffeef4;
-            color: #d63384;
-        }
+.sidebar-left ul li i {
+    margin-right: 10px;
+}
 
-        .sidebar-left ul li i {
-            margin-right: 10px;
-        }
 
         .main {
             margin-left: 260px;
@@ -80,12 +79,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <body>
 
 <div class="sidebar-left">
-    <h2>My Calendar</h2>
+    <img src="images/logo.png" alt="My Calendar" style="width: 180%; max-width: 250px; margin-bottom:40px; margin-top:20px; display: block;">
     <ul>
-        <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
-        <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
-        <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="Calendar.php"><i class="fas fa-calendar"></i> Calendar</a></li>
+        <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
+        <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
 

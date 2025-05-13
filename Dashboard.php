@@ -1,14 +1,12 @@
 <?php
 session_start();
+include 'db.php';
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'calendardb');
-if ($conn->connect_error) {
-    die('Connection Failed: ' . $conn->connect_error);
-}
 
 // Get user ID
 $user_result = $conn->query("SELECT id FROM users WHERE username = '{$_SESSION['username']}'");
@@ -326,7 +324,7 @@ while ($row = $notes_query->fetch_assoc()) {
                 <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
                 <li><a href="Calendar.php"><i class="fas fa-calendar"></i> Calendar</a></li>
                 <li><a href="menu.php"><i class="fas fa-bars"></i> Menu</a></li>
-                <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
 

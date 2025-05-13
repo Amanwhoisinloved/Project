@@ -1,18 +1,17 @@
 <?php
+
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <?php
 session_start();
+include 'db.php';
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'calendardb');
-if ($conn->connect_error) {
-    die('Connection Failed: ' . $conn->connect_error);
-}
 
 $current_month = $_GET['month'] ?? date('m');
 $current_year = $_GET['year'] ?? date('Y');
@@ -390,7 +389,7 @@ $days_in_month = date('t', strtotime("$current_year-$current_month-01"));
          <li><a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>"><i class="fas fa-chart-line"></i> Dashboard</a></li>
         <li><a href="Calendar.php" class="<?= ($currentPage == 'Calendar.php') ? 'active' : '' ?>"><i class="fas fa-calendar"></i> Calendar</a></li>
         <li><a href="menu.php" class="<?= ($currentPage == 'menu.php') ? 'active' : '' ?>"><i class="fas fa-bars"></i> Menu</a></li>
-        <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </div>
 
